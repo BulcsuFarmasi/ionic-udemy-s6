@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'page-new-recipe',
-  templateUrl: 'new-recipe.html',
+  templateUrl: 'edit-recipe.html',
 })
-export class NewRecipePage {
+export class EditRecipePage {
 
 }
