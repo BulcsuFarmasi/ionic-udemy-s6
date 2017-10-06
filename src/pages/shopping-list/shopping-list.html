@@ -40,7 +40,7 @@
     </button>
   </form>
   <ion-list>
-      <ion-item *ngFor="let item of listItems">
+      <ion-item *ngFor="let item of listItems; let i=index" (click)="onRemoveItem(i)">
           <p>{{ item.name }} ({{ item.amount }})</p>
       </ion-item>
   </ion-list>
