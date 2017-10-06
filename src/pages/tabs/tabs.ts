@@ -9,8 +9,4 @@ import { ShoppingListPage } from '../shopping-list/shopping-list';
 export class TabsPage {
     public recipesPage = RecipesPage;
     public shoppingListPage = ShoppingListPage;
-
-    constructor () {
-        console.log(this.shoppingListPage);
-    }
 }
