@@ -17,14 +17,19 @@ export class EditRecipePage implements OnInit {
 
   ngOnInit () {
       this.mode = this.navParams.get('mode');
+      this.initializeForm();
   }
 
-  initializeForm () {
-      this.recipeForm = new FormGroup({
-          title: new FormControl(null, Validators.required),
-          description: new FormControl(null, Validators.required),
-          difficulty: new FormControl('Medium', Validators.required)
-      })
+  onSubmit () {
+      console.log(this.recipeForm);
   }
-  
+
+  private initializeForm () {
+     this.recipeForm = new FormGroup({
+         title: new FormControl(null, Validators.required),
+         description: new FormControl(null, Validators.required),
+         difficulty: new FormControl('Medium', Validators.required)
+     })
+  }
+
 }
