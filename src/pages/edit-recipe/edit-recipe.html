@@ -32,6 +32,20 @@
         </ion-select>
       </ion-item>
     </ion-list>
+    <button
+        type="button"
+        ion-button
+        clear
+        block
+        (click)="onManageIngredients()">
+      Manage Ingredients
+    </button>
+    <ion-list>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input type="Next"></ion-input>
+      </ion-item>
+    </ion-list>
     <button type="submit" ion-button block>{{ mode }} Recipe</button>
   </form>
 </ion-content>
