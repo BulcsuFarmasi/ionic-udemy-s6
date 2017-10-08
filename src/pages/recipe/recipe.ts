@@ -1,8 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+
+import { NavParams } from 'ionic-angular';
+
+import { Recipe } from '../../models/recipe';
+
 @Component({
   selector: 'page-recipe',
   templateUrl: 'recipe.html',
 })
-export class RecipePage {
+export class RecipePage implements OnInit{
+    public recipe:Recipe;
+    private index:number;
 
+    constructor (private navParams:NavParams) {}
+
+    ngOnInit () {
+      this.recipe = this.navParams.get('recipe');
+      this.index = this.navParams.get('index');
+    }
 }

@@ -5,6 +5,7 @@ import { NavController } from 'ionic-angular';
 import { Recipe } from '../../models/recipe'
 
 import { EditRecipePage } from '../edit-recipe/edit-recipe';
+import { RecipePage } from '../recipe/recipe';
 
 import { RecipesService } from '../../services/recipes';
 
@@ -28,8 +29,8 @@ export class RecipesPage {
     this.recipes = this.recipesService.getRecipes();
   }
 
-  onLoadRecipe () {
-
+  onLoadRecipe (recipe:Recipe, index:number) {
+      this.navController.push(RecipePage, {recipe, index});
   }
 
   onNewRecipe () {
