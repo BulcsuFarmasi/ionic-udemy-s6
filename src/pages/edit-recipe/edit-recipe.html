@@ -40,10 +40,11 @@
         (click)="onManageIngredients()">
       Manage Ingredients
     </button>
-    <ion-list>
-      <ion-item>
-        <ion-label>Name</ion-label>
-        <ion-input type="Next"></ion-input>
+    <ion-list formArrayName="ingredients">
+      <ion-item
+          *ngFor="let ingredientControl of recipeForm.get('ingredients').controls; let i = index">
+        <ion-label floating>Name</ion-label>
+        <ion-input type="Next" [formControlName]="i"></ion-input>
       </ion-item>
     </ion-list>
     <button type="submit" ion-button block>{{ mode }} Recipe</button>
