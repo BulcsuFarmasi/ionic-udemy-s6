@@ -28,7 +28,9 @@ export class EditRecipePage implements OnInit {
             buttons: [
                 {
                     text: 'Add Ingredient',
-                    handler: () => {}
+                    handler: () => {
+                        this.createNewIngedientAlert().present();
+                    }
                 },
                 {
                     text: 'Remove all Ingredients',
@@ -43,6 +45,7 @@ export class EditRecipePage implements OnInit {
                 }
             ]
         })
+      actionSheet.present();
   }
 
   onSubmit () {
@@ -50,7 +53,7 @@ export class EditRecipePage implements OnInit {
   }
 
   private createNewIngedientAlert () {
-      const newIngredientAlert = this.alertController.create({
+     return this.alertController.create({
           title: 'Add Ingredient',
           inputs: [
               {
@@ -67,7 +70,10 @@ export class EditRecipePage implements OnInit {
                   text: 'Add',
                   handler: data => {
                       if (data.name.trim() == '' || data.name == null){
-
+                          return;
+                      } else {
+                          (<FormArray>this.recipeForm.get('ingredients'))
+                              .push(new FormControl(data.name, Validators.required))
                       }
                   }
               }
