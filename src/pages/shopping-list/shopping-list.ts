@@ -11,6 +11,7 @@ import { Ingredient } from '../../models/ingredient';
 export class ShoppingListPage {
     
     public listItems:Ingredient[] = [];
+    public mode:string = 'Add';
     
     constructor (private shoppingListService:ShoppingListService){}
     
@@ -18,17 +19,21 @@ export class ShoppingListPage {
         this.loadItems();
     }
 
-    onAddItem (form:NgForm) {
-        const name = form.value.ingredientName;
-        const amount = form.value.amount;
-        this.shoppingListService.addItem(name, amount);
-        this.loadItems();
-        form.reset();
+    onEditItem (index: number) {
+        this.mode = 'Edit'
     }
 
     onRemoveItem (index:number) {
         this.shoppingListService.removeItem(index);
         this.loadItems();
+    }
+
+    onSubmit (form:NgForm) {
+        const name = form.value.ingredientName;
+        const amount = form.value.amount;
+        this.shoppingListService.addItem(name, amount);
+        this.loadItems();
+        form.reset();
     }
 
     loadItems () {
