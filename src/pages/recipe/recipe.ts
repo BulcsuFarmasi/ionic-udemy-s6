@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { NavController, NavParams } from 'ionic-angular';
+import  { AlertController, NavController, NavParams } from 'ionic-angular';
 
 import { Recipe } from '../../models/recipe';
 
@@ -21,7 +21,8 @@ export class RecipePage implements OnInit{
     constructor (private navParams:NavParams,
                  private navController:NavController,
                  private shoppingListService:ShoppingListService,
-                 private recipesService:RecipesService) {}
+                 private recipesService:RecipesService,
+                 private alertController:AlertController) {}
 
     ngOnInit () {
       this.recipe = this.navParams.get('recipe');
@@ -33,8 +34,24 @@ export class RecipePage implements OnInit{
     }
 
     onDeleteRecipe () {
-        this.recipesService.removeRecipe(this.index);
-        this.navController.popToRoot();
+        const alert = this.alertController.create({
+            title: 'Confirm deleting',
+            message: 'Do you want to delete this recipe?',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel'
+                },
+                {
+                    text: 'Delete',
+                    handler: () => {
+                        this.recipesService.removeRecipe(this.index);
+                        this.navController.popToRoot();
+                    }
+                }
+            ]
+        })
+        alert.present();
     }
 
     onEditRecipe () {
