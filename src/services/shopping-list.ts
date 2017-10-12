@@ -13,8 +13,8 @@ export class ShoppingListService {
         this.ingredients.push(...items);
     }
 
-    editItem (index: number, item:Ingredient) {
-        this.ingredients[index] = item;
+    editItem (index: number, name: string, amount:number) {
+        this.ingredients[index] = new Ingredient(name, amount);
     }
 
     getItems() {
