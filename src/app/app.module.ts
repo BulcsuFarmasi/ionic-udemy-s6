@@ -9,6 +9,7 @@ import { EditRecipePage } from '../pages/edit-recipe/edit-recipe';
 import { RecipePage } from '../pages/recipe/recipe';
 import { RecipesPage } from '../pages/recipes/recipes';
 import { ShoppingListPage } from '../pages/shopping-list/shopping-list';
+import { ShoppingListOptionsPage } from '../pages/shopping-list/shopping-list-options/shopping-list-options';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -24,6 +25,7 @@ import { ShoppingListService } from '../services/shopping-list';
     RecipePage,
     RecipesPage,
     ShoppingListPage,
+    ShoppingListOptionsPage,
     SigninPage,
     SignupPage,
     TabsPage
@@ -39,6 +41,7 @@ import { ShoppingListService } from '../services/shopping-list';
     RecipePage,
     RecipesPage,
     ShoppingListPage,
+    ShoppingListOptionsPage,
     SigninPage,
     SignupPage,
     TabsPage
