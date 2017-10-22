@@ -50,7 +50,11 @@ export class ShoppingListPage {
             } else {
                 this.authService.getActiveUser().getToken()
                     .then((token) => {
-
+                        this.shoppingListService.storeList(token)
+                            .subscribe(
+                                () => {console.log('Success!')},
+                                (error) => {console.log(error)}
+                            );
                     })
             }
         })

@@ -17,7 +17,7 @@ import { ViewController } from 'ionic-angular';
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <button ion-button outline (click)="onAction('store')">Store List</button>
+                    <button ion-button outline (click)="onAction('store')">Save List</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -27,7 +27,7 @@ import { ViewController } from 'ionic-angular';
 export class ShoppingListOptionsPage {
     constructor (private viewController:ViewController) {}
 
-    onLoad (action:string) {
+    onAction (action:string) {
         this.viewController.dismiss({action: action});
     }
 }
