@@ -9,6 +9,8 @@ import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { AuthService } from '../services/auth';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -17,11 +19,11 @@ export class MyApp {
   isAuthenticated = false;
   signinPage = SigninPage;
   signupPage = SignupPage;
-  tabsPage = TabsPage;
+  rootPage:any = TabsPage;
   @ViewChild('nav') nav:NavController;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-     private menuController:MenuController) {
+              private menuController:MenuController, private authService:AuthService) {
     firebase.initializeApp({
         apiKey: 'AIzaSyAinpZUmMQlkO-zlZaqutHNxoc_XZmOuvo',
         authDomain: 'ionic-recipe-book-15ab7.firebaseapp.com'
@@ -29,10 +31,9 @@ export class MyApp {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
           this.isAuthenticated = true;
-          this.nav.setRoot(this.tabsPage);
+          this.rootPage = TabsPage;
       } else {
-        this.isAuthenticated = false;
-        this.nav.setRoot(this.signinPage);
+         this.rootPage = SigninPage;
       }
 
     })
@@ -50,7 +51,8 @@ export class MyApp {
     }
 
     onLogout () {
-
+        this.authService.logout()
+        this.menuController.close();
     }
 
 }
