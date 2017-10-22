@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AuthService } from '../../services/auth';
+import { AlertController, LoadingController } from 'ionic-angular';
 
 
 @Component({
@@ -10,11 +11,28 @@ import { AuthService } from '../../services/auth';
 })
 export class SignupPage {
 
-    constructor (private authService:AuthService) {}
+    constructor (private authService:AuthService,
+                 private loadingController:LoadingController,
+                 private alertController:AlertController) {}
 
     onSignup(form:NgForm) {
+        const loading = this.loadingController.create({
+            content:'Signing you up...'
+        });
+        loading.present();
         this.authService.signup(form.value.email, form.value.password)
-            .then(data => {console.log(data)})
-            .catch(error => {console.log(error)})
+            .then(data => {
+                loading.dismiss();
+            })
+            .catch(error => {
+                loading.dismiss();
+                const alert = this.alertController.create({
+                    title: 'Signup failed',
+                    message: error.message,
+                    buttons:['Ok']
+                });
+                alert.present();
+
+            })
     }
 }
