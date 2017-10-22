@@ -14,6 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 })
 export class MyApp {
 
+  isAuthenticated = false;
   signinPage = SigninPage;
   signupPage = SignupPage;
   tabsPage = TabsPage;
@@ -25,6 +26,16 @@ export class MyApp {
         apiKey: 'AIzaSyAinpZUmMQlkO-zlZaqutHNxoc_XZmOuvo',
         authDomain: 'ionic-recipe-book-15ab7.firebaseapp.com'
     });
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+          this.isAuthenticated = true;
+          this.nav.setRoot(this.tabsPage);
+      } else {
+        this.isAuthenticated = false;
+        this.nav.setRoot(this.signinPage);
+      }
+
+    })
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
