@@ -21,6 +21,12 @@ export class ShoppingListService {
         this.ingredients.push(...items);
     }
 
+    fetchList (token:string) {
+        const userId = this.authService.getActiveUser().uid
+        const listObservable = this.http.get(`https://ionic-recipe-book-15ab7.firebaseio.com/${userId}/shopping-list.json?auth=${token}`)
+        return listObservable;
+    }
+
     getItems() {
         return this.ingredients.slice();
     }
@@ -33,6 +39,6 @@ export class ShoppingListService {
         const userId = this.authService.getActiveUser().uid
         return this.http
             .put(`https://ionic-recipe-book-15ab7.firebaseio.com/${userId}/shopping-list.json?auth=${token}`,
-                        this.ingredients)
+                this.ingredients)
     }
 }
