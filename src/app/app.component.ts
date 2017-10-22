@@ -22,8 +22,8 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
      private menuController:MenuController) {
     firebase.initializeApp({
-        apiKey: "AIzaSyAinpZUmMQlkO-zlZaqutHNxoc_XZmOuvo",
-        authDomain: "ionic-recipe-book-15ab7.firebaseapp.com
+        apiKey: 'AIzaSyAinpZUmMQlkO-zlZaqutHNxoc_XZmOuvo',
+        authDomain: 'ionic-recipe-book-15ab7.firebaseapp.com'
     });
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.

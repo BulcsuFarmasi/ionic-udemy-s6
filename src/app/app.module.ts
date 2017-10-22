@@ -13,6 +13,7 @@ import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { AuthService } from '../services/auth';
 import { RecipesService } from '../services/recipes';
 import { ShoppingListService } from '../services/shopping-list';
 
@@ -46,6 +47,7 @@ import { ShoppingListService } from '../services/shopping-list';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService,
     ShoppingListService,
     RecipesService
   ]
