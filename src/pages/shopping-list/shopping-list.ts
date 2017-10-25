@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { PopoverController } from 'ionic-angular';
+import { LoadingController, PopoverController} from 'ionic-angular';
 
 
 import { Ingredient } from '../../models/ingredient';
@@ -10,7 +10,6 @@ import { ShoppingListOptionsPage } from './shopping-list-options/shopping-list-o
 
 import { AuthService } from '../../services/auth';
 import { ShoppingListService } from '../../services/shopping-list';
-import {listenToElementOutputs} from "@angular/core/src/view/element";
 
 
 @Component({
@@ -23,7 +22,8 @@ export class ShoppingListPage {
     
     constructor (private shoppingListService:ShoppingListService,
                  private popoverController:PopoverController,
-                 private authService:AuthService){}
+                 private authService:AuthService,
+                 private loadingController:LoadingController){}
     
     ionViewWillEnter () {
         this.loadItems();
@@ -43,31 +43,37 @@ export class ShoppingListPage {
     }
 
     onShowOptions (event:MouseEvent) {
+        const loading = this.loadingController.create({
+            content: 'Please wait...'
+        });
         const popover = this.popoverController.create(ShoppingListOptionsPage);
         popover.present({ev: event});
         popover.onDidDismiss((data) => {
             if (data.action == 'load') {
+                loading.present();
                 this.authService.getActiveUser().getToken()
                     .then((token) => {
                         this.shoppingListService.fetchList(token)
                             .subscribe(
                                 (list:Ingredient[]) => {
+                                    loading.dismiss();
                                     if (list) {
                                         this.listItems = list;
                                     } else {
                                         this.listItems = [];
                                     }
                                 },
-                                (error) => {console.log(error)}
+                                (error) => {loading.dismiss()}
                             );
                     })
-            } else {
+            } else if (data.action == 'store') {
+                loading.present();
                 this.authService.getActiveUser().getToken()
                     .then((token) => {
                         this.shoppingListService.storeList(token)
                             .subscribe(
-                                () => {console.log('Success!')},
-                                (error) => {console.log(error)}
+                                () => {loading.dismiss()},
+                                (error) => {loading.dismiss()}
                             );
                     })
             }
