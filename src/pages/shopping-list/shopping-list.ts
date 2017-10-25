@@ -59,6 +59,9 @@ export class ShoppingListPage {
         const popover = this.popoverController.create(DatabaseOptionsPage);
         popover.present({ev: event});
         popover.onDidDismiss((data) => {
+            if (!data) {
+                return;
+            }
             if (data.action == 'load') {
                 loading.present();
                 this.authService.getActiveUser().getToken()

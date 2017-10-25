@@ -23,7 +23,15 @@ export class RecipesService {
     fetchList (token:string) {
         const userId = this.authService.getActiveUser().uid;
         return this.http.get(`https://ionic-recipe-book-15ab7.firebaseio.com/${userId}/recipes.json?auth=${token}`)
-            .map((response:Response) => response.json())
+            .map((response:Response) => {
+                const recipes:Recipe[] = response.json() ? response.json() : [];
+                for (let item of recipes) {
+                    if(!item.hasOwnProperty('ingredients')) {
+                        item.ingredients = [];
+                    }
+                }
+                return recipes;
+            })
             .do((recipes:Recipe[]) => {
                 if (recipes) {
                     this.recipes = recipes;
