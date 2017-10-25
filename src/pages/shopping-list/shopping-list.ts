@@ -10,6 +10,7 @@ import { ShoppingListOptionsPage } from './shopping-list-options/shopping-list-o
 
 import { AuthService } from '../../services/auth';
 import { ShoppingListService } from '../../services/shopping-list';
+import {listenToElementOutputs} from "@angular/core/src/view/element";
 
 
 @Component({
@@ -51,11 +52,11 @@ export class ShoppingListPage {
                         this.shoppingListService.fetchList(token)
                             .subscribe(
                                 (list:Ingredient[]) => {
-                                   if (list) {
-                                       this.listItems = list;
-                                   } else {
-                                       this.listItems = [];
-                                   }
+                                    if (list) {
+                                        this.listItems = list;
+                                    } else {
+                                        this.listItems = [];
+                                    }
                                 },
                                 (error) => {console.log(error)}
                             );

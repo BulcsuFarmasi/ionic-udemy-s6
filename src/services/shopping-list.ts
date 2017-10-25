@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
+
+import 'rxjs/Rx';
 
 
 import { Ingredient } from '../models/ingredient';
@@ -23,8 +25,12 @@ export class ShoppingListService {
 
     fetchList (token:string) {
         const userId = this.authService.getActiveUser().uid
-        const listObservable = this.http.get(`https://ionic-recipe-book-15ab7.firebaseio.com/${userId}/shopping-list.json?auth=${token}`)
-        return listObservable;
+        return this.http.get(`https://ionic-recipe-book-15ab7.firebaseio.com/${userId}/shopping-list.json?auth=${token}`)
+            .map((response:Response) => response.json())
+            .do(data => {
+                this.ingredients = data;
+            });
+
     }
 
     getItems() {
@@ -40,5 +46,6 @@ export class ShoppingListService {
         return this.http
             .put(`https://ionic-recipe-book-15ab7.firebaseio.com/${userId}/shopping-list.json?auth=${token}`,
                 this.ingredients)
+            .map((response:Response) => response.json())
     }
 }
