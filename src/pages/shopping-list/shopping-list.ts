@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { LoadingController, PopoverController} from 'ionic-angular';
+import { AlertController, LoadingController, PopoverController} from 'ionic-angular';
 
 
 import { Ingredient } from '../../models/ingredient';
@@ -23,10 +23,20 @@ export class ShoppingListPage {
     constructor (private shoppingListService:ShoppingListService,
                  private popoverController:PopoverController,
                  private authService:AuthService,
-                 private loadingController:LoadingController){}
+                 private loadingController:LoadingController,
+                 private alertController:AlertController){}
     
     ionViewWillEnter () {
         this.loadItems();
+    }
+
+    handleError (errorMessage:string) {
+        const alert = this.alertController.create({
+            title: 'An error occured!',
+            message: errorMessage,
+            buttons: ['Ok']
+        })
+        alert.present();
     }
 
     onAddItem (form:NgForm) {
@@ -63,7 +73,10 @@ export class ShoppingListPage {
                                         this.listItems = [];
                                     }
                                 },
-                                (error) => {loading.dismiss()}
+                                (error) => {
+                                    loading.dismiss();
+                                    this.handleError(error.json().error);
+                                }
                             );
                     })
             } else if (data.action == 'store') {
@@ -73,7 +86,10 @@ export class ShoppingListPage {
                         this.shoppingListService.storeList(token)
                             .subscribe(
                                 () => {loading.dismiss()},
-                                (error) => {loading.dismiss()}
+                                (error) => {
+                                    loading.dismiss()
+                                    this.handleError(error.json().error);
+                                }
                             );
                     })
             }
