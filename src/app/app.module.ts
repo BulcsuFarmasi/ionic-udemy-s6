@@ -6,11 +6,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+import { DatabaseOptionsPage } from '../pages/database-options/database-options';
 import { EditRecipePage } from '../pages/edit-recipe/edit-recipe';
 import { RecipePage } from '../pages/recipe/recipe';
 import { RecipesPage } from '../pages/recipes/recipes';
 import { ShoppingListPage } from '../pages/shopping-list/shopping-list';
-import { ShoppingListOptionsPage } from '../pages/shopping-list/shopping-list-options/shopping-list-options';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -22,11 +22,11 @@ import { ShoppingListService } from '../services/shopping-list';
 @NgModule({
   declarations: [
     MyApp,
+    DatabaseOptionsPage,
     EditRecipePage,
     RecipePage,
     RecipesPage,
     ShoppingListPage,
-    ShoppingListOptionsPage,
     SigninPage,
     SignupPage,
     TabsPage
@@ -39,11 +39,11 @@ import { ShoppingListService } from '../services/shopping-list';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    DatabaseOptionsPage,
     EditRecipePage,
     RecipePage,
     RecipesPage,
     ShoppingListPage,
-    ShoppingListOptionsPage,
     SigninPage,
     SignupPage,
     TabsPage

@@ -27,8 +27,12 @@ export class ShoppingListService {
         const userId = this.authService.getActiveUser().uid
         return this.http.get(`https://ionic-recipe-book-15ab7.firebaseio.com/${userId}/shopping-list.json?auth=${token}`)
             .map((response:Response) => response.json())
-            .do(data => {
-                this.ingredients = data;
+            .do((ingredients:Ingredient[]) => {
+                if (this.ingredients) {
+                    this.ingredients = ingredients;
+                } else {
+                    this.ingredients = [];
+                }
             });
 
     }

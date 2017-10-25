@@ -6,7 +6,7 @@ import { AlertController, LoadingController, PopoverController} from 'ionic-angu
 
 import { Ingredient } from '../../models/ingredient';
 
-import { ShoppingListOptionsPage } from './shopping-list-options/shopping-list-options';
+import { DatabaseOptionsPage } from '../database-options/database-options';
 
 import { AuthService } from '../../services/auth';
 import { ShoppingListService } from '../../services/shopping-list';
@@ -56,7 +56,7 @@ export class ShoppingListPage {
         const loading = this.loadingController.create({
             content: 'Please wait...'
         });
-        const popover = this.popoverController.create(ShoppingListOptionsPage);
+        const popover = this.popoverController.create(DatabaseOptionsPage);
         popover.present({ev: event});
         popover.onDidDismiss((data) => {
             if (data.action == 'load') {
